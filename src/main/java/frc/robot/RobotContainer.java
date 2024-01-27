@@ -22,6 +22,7 @@ import frc.robot.commands.ChargedUpAuton;
 import frc.robot.commands.TurnOnLed;
 import frc.robot.commands.TurnOffLed;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Lights;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.OUTPUT);
+  private final Lights lights = new Lights(m_onboardIO);
 
   // Assumes a gamepad plugged into channel 0
   private final Joystick m_controller = new Joystick(0);
@@ -75,7 +77,7 @@ public class RobotContainer {
         .onFalse(new PrintCommand("Button A Released"));
 
     JoystickButton joystickTrigger = new JoystickButton(m_controller, 1);
-    joystickTrigger.onTrue(new TurnOnLed(m_onboardIO)).onFalse(new TurnOffLed(m_onboardIO));
+    joystickTrigger.onTrue(new TurnOnLed(lights)).onFalse(new TurnOffLed(lights));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance(m_drivetrain));
