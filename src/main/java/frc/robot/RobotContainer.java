@@ -57,6 +57,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    // ensure that the red LED on the robot starts "off"
+    lights.turnOffRedLed();
   }
 
   /**
